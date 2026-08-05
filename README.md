@@ -1,14 +1,12 @@
 # Perfil de jugador — Programación Web 1
 
-**Nombre:** <!-- tu nombre completo -->
+**Nombre:** Santiago Loaiza Restrepo
 **Programa:** Ingeniería en Informática · cuarto semestre
 **Semestre:** 2026-2
-**Usuario de GitHub:** <!-- @tuusuario -->
+**Usuario de GitHub:** @santyloaiza74
 
 ## Sobre mí
-
-<!-- Dos o tres líneas: qué te interesa de la programación web, qué juego te
-     gustaría construir si pudieras elegir, con qué lenguajes ya trabajaste. -->
+Lo que me llama la atención de la programación es el backend y toda la lógica que lleva; sin embargo, me gustaría aprender más de frontend. Si tuviera la oportunidad de hacer un juego, construiría alguno como Sky Serpents. Hasta ahora he trabajado con Python, JavaScript, Java y un poco de C#.
 
 ## Progreso de la campaña
 
