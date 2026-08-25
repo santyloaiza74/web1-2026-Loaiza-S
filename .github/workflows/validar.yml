@@ -1,0 +1,179 @@
+name: Validar entrega
+
+# Se ejecuta en cada Pull Request hacia main y en cada push a una rama de práctica.
+# No modifiques este archivo: es el que valida tus entregas antes de que se revisen.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ['feat/**']
+
+jobs:
+  estructura:
+    name: Estructura y archivos obligatorios
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detectar la práctica que estás entregando
+        id: detectar
+        run: |
+          # Solo se validan las prácticas con trabajo real: las que tienen
+          # algo dentro de src/ además del .gitkeep. Una carpeta vacía es una
+          # práctica que todavía no empezaste, y no debe hacer fallar el PR.
+          entregadas=""
+          for d in $(find . -maxdepth 1 -type d -name 'practica-*' | sort); do
+            archivos=$(find "$d/src" -type f -not -name '.gitkeep' 2>/dev/null | wc -l)
+            if [ "$archivos" -gt 0 ]; then
+              entregadas="$entregadas $d"
+            fi
+          done
+
+          if [ -z "$entregadas" ]; then
+            echo "::error::No se encontró ninguna práctica con archivos en src/. Si estás entregando, tu código va dentro de practica-NN-nombre/src/."
+            exit 1
+          fi
+
+          echo "Prácticas con trabajo entregado:"
+          for d in $entregadas; do echo "  - $d"; done
+          echo "entregadas=$entregadas" >> $GITHUB_OUTPUT
+
+      - name: Verificar README.md e IA.md de las prácticas entregadas
+        run: |
+          fallo=0
+          for d in ${{ steps.detectar.outputs.entregadas }}; do
+            for f in README.md IA.md; do
+              if [ ! -f "$d/$f" ]; then
+                echo "::error file=$d::Falta el archivo obligatorio $f en $d"
+                fallo=1
+              fi
+            done
+          done
+          exit $fallo
+
+      - name: Verificar que el README de la práctica esté completo
+        run: |
+          fallo=0
+          for d in ${{ steps.detectar.outputs.entregadas }}; do
+            f="$d/README.md"
+            # Se descartan encabezados, líneas vacías y los comentarios HTML
+            # de la plantilla: solo cuenta lo que escribiste tú.
+            propio=$(sed 's/<!--.*-->//g' "$f" \
+              | grep -v '^\s*<!--' | grep -v -- '-->' \
+              | grep -v '^#' | grep -v '^\s*$' | wc -w)
+            if [ "$propio" -lt 25 ]; then
+              echo "::error file=$f::El README de $d tiene solo $propio palabras propias (mínimo 25). Explica qué hiciste, cómo correrlo y qué aprendiste."
+              fallo=1
+            fi
+          done
+          exit $fallo
+
+      - name: Verificar que IA.md tenga una declaración real
+        run: |
+          fallo=0
+          for d in ${{ steps.detectar.outputs.entregadas }}; do
+            f="$d/IA.md"
+
+            # Se elimina TODO lo que viene de la plantilla antes de contar:
+            #   - comentarios HTML (las instrucciones entre <!-- -->)
+            #   - líneas de cita (>), que son las advertencias del encabezado
+            #   - encabezados (#) y vallas de código vacías
+            propio=$(sed 's/<!--.*-->//g' "$f" \
+              | grep -v '^\s*<!--' | grep -v -- '-->' \
+              | grep -v '^\s*>' \
+              | grep -v '^#' \
+              | grep -v '^\s*```' \
+              | grep -v '^\s*$' \
+              | wc -w)
+
+            if [ "$propio" -lt 40 ]; then
+              echo "::error file=$f::IA.md de $d tiene solo $propio palabras propias (mínimo 40). La declaración de uso de IA es obligatoria y debe ser específica: qué pediste, qué te devolvió, qué estaba mal y qué corregiste. Si no usaste IA, dilo y explica cómo resolviste la parte más difícil."
+              fallo=1
+            fi
+          done
+          exit $fallo
+
+      - name: Verificar el README de la raíz
+        run: |
+          if [ ! -f README.md ]; then
+            echo "::error::Falta el README.md de la raíz con tu perfil de jugador."
+            exit 1
+          fi
+          if ! grep -qiE 'practica|misión|mision' README.md; then
+            echo "::warning::El README de la raíz no parece enlazar tus prácticas."
+          fi
+
+      - name: Avisar si subiste algo que no debías
+        run: |
+          if find . -type d -name 'node_modules' -not -path './.git/*' | grep -q .; then
+            echo "::error::Subiste node_modules. Añádelo a .gitignore y bórralo del historial."
+            exit 1
+          fi
+          if find . -name '.env' -not -path './.git/*' | grep -q .; then
+            echo "::error::Subiste un archivo .env. Puede contener claves de API: bórralo y rota la clave."
+            exit 1
+          fi
+          echo "Sin node_modules ni .env en el repositorio."
+
+  html:
+    name: Validez del HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar validador
+        run: npm install -g html-validate
+
+      - name: Crear configuración del validador
+        run: |
+          # Sin configuración explícita, html-validate no aplica ninguna regla.
+          if [ ! -f .htmlvalidate.json ]; then
+            echo '{ "extends": ["html-validate:recommended"] }' > .htmlvalidate.json
+          fi
+
+      - name: Validar archivos HTML
+        run: |
+          archivos=$(find . -name '*.html' -not -path './node_modules/*' -not -path './*/node_modules/*' -not -path './.git/*')
+          if [ -z "$archivos" ]; then
+            echo "No hay archivos HTML sueltos (normal si usas React o Next.js)."
+            exit 0
+          fi
+          echo "Validando:"
+          for a in $archivos; do echo "  - $a"; done
+          html-validate $archivos
+
+  compilar:
+    name: Instalar y compilar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Buscar proyectos con package.json
+        run: |
+          proyectos=$(find . -maxdepth 3 -name 'package.json' -not -path './node_modules/*' -not -path './*/node_modules/*')
+          if [ -z "$proyectos" ]; then
+            echo "Sin proyectos de Node en esta entrega. Nada que compilar."
+            exit 0
+          fi
+          for p in $proyectos; do
+            dir=$(dirname "$p")
+            echo "──── Procesando $dir ────"
+            cd "$GITHUB_WORKSPACE/$dir"
+            if [ -f package-lock.json ]; then
+              npm ci --no-audit --no-fund
+            else
+              npm install --no-audit --no-fund
+            fi
+            # `npm run` lista los scripts disponibles; se busca "build" entre ellos.
+            if npm run 2>/dev/null | grep -qE '^\s+build'; then
+              npm run build
+            else
+              echo "Sin script de build en $dir, se omite."
+            fi
+            cd "$GITHUB_WORKSPACE"
+          done
