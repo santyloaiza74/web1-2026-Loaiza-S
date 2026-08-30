@@ -12,8 +12,8 @@ Lo que me llama la atención de la programación es el backend y toda la lógica
 
 | # | Misión | Estado | XP | Repositorio | Jugar |
 |---|---|---|---|---|---|
-| 00 | Registro de jugador | ⬜ | /25 | [código](./practica-00-registro) | — |
-| 01 | Ficha de personaje | ⬜ | /100 | [código](./practica-01-ficha) | — |
+| 00 | Registro de jugador | ✅ | /25 | [código](./practica-00-registro) | — |
+| 01 | Ficha de personaje | ✅ | /100 | [código](./practica-01-ficha) | — |
 | 02 | Tablero adaptable | ⬜ | /100 | [código](./practica-02-tablero) | — |
 | 03 | Juego de memoria | ⬜ | /100 | [código](./practica-03-memoria) | — |
 | 04 | Trivia con API | ⬜ | /100 | [código](./practica-04-trivia) | — |
