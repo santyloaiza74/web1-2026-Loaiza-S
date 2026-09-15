@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/cart.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>CompraYA - Todo lo que buscas</title>
+</head>
+
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-warning shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-3" href="#">CompraYA</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex flex-grow-1 mx-lg-4 my-3 my-lg-0" role="search">
+                        <input class="form-control rounded-start" type="search"
+                            placeholder="Buscar productos, marcas y más" aria-label="Buscar productos">
+                        <button class="btn btn-light rounded-end" type="submit">Buscar</button>
+                    </form>
+                    <ul class="navbar-nav align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="#categorias">Categorías</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#ofertas">Ofertas</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Mi cuenta
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Ingresar</a></li>
+                                <li><a class="dropdown-item" href="#">Mis compras</a></li>
+                                <li><a class="dropdown-item" href="#">Favoritos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="container py-4">
+            <div id="carouselExample" class="carousel slide rounded overflow-hidden shadow-sm" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Oferta uno"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+                        aria-label="Oferta dos"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+                        aria-label="Oferta tres"></button>
+                </div>
+                <div class="ratio ratio-21x9">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&crop=center&w=1400&h=600&q=80"
+                                class="d-block w-100 h-100 object-fit-cover" alt="Persona comprando en línea">
+                            <div class="carousel-caption text-start">
+                                <h1 class="fw-bold">Encuentra eso que buscas</h1>
+                                <p>Compra fácil, rápido y seguro en CompraYA.</p><a href="#ofertas"
+                                    class="btn btn-warning">Ver ofertas</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&crop=center&w=1400&h=600&q=80"
+                                class="d-block w-100 h-100 object-fit-cover" alt="Compra protegida en línea">
+                            <div class="carousel-caption text-start">
+                                <h2 class="fw-bold">Compra con confianza</h2>
+                                <p>Protección para cada una de tus compras.</p><a href="#beneficios"
+                                    class="btn btn-warning">Conocer beneficios</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&crop=center&w=1400&h=600&q=80"
+                                class="d-block w-100 h-100 object-fit-cover"
+                                alt="Computador portátil sobre un escritorio">
+                            <div class="carousel-caption text-start">
+                                <h2 class="fw-bold">Tecnología para todos</h2>
+                                <p>Renueva tus dispositivos con precios increíbles.</p><a href="#productos"
+                                    class="btn btn-warning">Comprar tecnología</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <section id="categorias" class="container pb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h4 mb-0">Explora por categoría</h2><a href="#productos" class="link-primary">Ver todas</a>
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3 text-center">
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">📱</div>
+                            <p class="mb-0 mt-2">Tecnología</p>
+                        </div>
+                    </a></div>
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">👟</div>
+                            <p class="mb-0 mt-2">Moda</p>
+                        </div>
+                    </a></div>
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">🏠</div>
+                            <p class="mb-0 mt-2">Hogar</p>
+                        </div>
+                    </a></div>
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">🎮</div>
+                            <p class="mb-0 mt-2">Videojuegos</p>
+                        </div>
+                    </a></div>
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">💄</div>
+                            <p class="mb-0 mt-2">Belleza</p>
+                        </div>
+                    </a></div>
+                <div class="col"><a href="#productos" class="card h-100 text-decoration-none text-dark shadow-sm">
+                        <div class="card-body">
+                            <div class="display-5">🚲</div>
+                            <p class="mb-0 mt-2">Deportes</p>
+                        </div>
+                    </a></div>
+            </div>
+        </section>
+        <section id="ofertas" class="container pb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h4 mb-0">Ofertas del día</h2><span class="badge text-bg-danger">Hasta 40% OFF</span>
+            </div>
+            <div id="productos" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                <div class="col">
+                    <article class="card h-100 border-0 shadow-sm">
+                        <div class="ratio ratio-4x3"><img
+                                src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80"
+                                class="w-100 h-100 object-fit-cover" alt="Computador portátil gris"></div>
+                        <div class="card-body"><span class="badge text-bg-success mb-2">Envío gratis</span>
+                            <h3 class="h6">Portátil ultraligero 14 pulgadas</h3>
+                            <p class="h4 mb-1">$1.899.900</p>
+                            <p class="text-secondary small">12 cuotas sin interés</p><a href="#"
+                                class="btn btn-outline-primary w-100">Ver producto</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card h-100 border-0 shadow-sm">
+                        <div class="ratio ratio-4x3"><img
+                                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+                                class="w-100 h-100 object-fit-cover" alt="Reloj inteligente negro"></div>
+                        <div class="card-body"><span class="badge text-bg-success mb-2">Envío gratis</span>
+                            <h3 class="h6">Reloj inteligente deportivo</h3>
+                            <p class="h4 mb-1">$249.900</p>
+                            <p class="text-secondary small">6 cuotas sin interés</p><a href="#"
+                                class="btn btn-outline-primary w-100">Ver producto</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card h-100 border-0 shadow-sm">
+                        <div class="ratio ratio-4x3"><img
+                                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+                                class="w-100 h-100 object-fit-cover" alt="Tenis deportivos rojos"></div>
+                        <div class="card-body"><span class="badge text-bg-warning mb-2">Oferta destacada</span>
+                            <h3 class="h6">Tenis urbanos para mujer y hombre</h3>
+                            <p class="h4 mb-1">$179.900</p>
+                            <p class="text-secondary small">Hasta 3 cuotas sin interés</p><a href="#"
+                                class="btn btn-outline-primary w-100">Ver producto</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card h-100 border-0 shadow-sm">
+                        <div class="ratio ratio-4x3"><img
+                                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80"
+                                class="w-100 h-100 object-fit-cover" alt="Silla moderna para el hogar"></div>
+                        <div class="card-body"><span class="badge text-bg-success mb-2">Envío gratis</span>
+                            <h3 class="h6">Silla de diseño para oficina</h3>
+                            <p class="h4 mb-1">$329.900</p>
+                            <p class="text-secondary small">10 cuotas sin interés</p><a href="#"
+                                class="btn btn-outline-primary w-100">Ver producto</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="beneficios" class="bg-white border-top border-bottom py-4">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+                    <div class="col">
+                        <div class="h5">Compra protegida</div>
+                        <p class="text-secondary mb-0">Recibe tu producto o te devolvemos el dinero.</p>
+                    </div>
+                    <div class="col">
+                        <div class="h5">Envíos rápidos</div>
+                        <p class="text-secondary mb-0">Seguimiento de tu pedido en todo momento.</p>
+                    </div>
+                    <div class="col">
+                        <div class="h5">Vende con nosotros</div>
+                        <p class="text-secondary mb-0">Publica tus productos y llega a más compradores.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-dark text-white mt-4 pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h2 class="h5">CompraYA</h2>
+                    <p class="text-white-50">Tu marketplace para comprar fácil y seguro.</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="h6">Enlaces útiles</h2>
+                    <ul class="list-unstyled">
+                        <li><a class="link-light text-decoration-none" href="#">Ayuda</a></li>
+                        <li><a class="link-light text-decoration-none" href="#">Términos y condiciones</a></li>
+                        <li><a class="link-light text-decoration-none" href="#">Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="h6">Atención al cliente</h2>
+                    <p class="text-white-50 mb-1">Lunes a sábado, 8:00 a.m. a 6:00 p.m.</p><a class="link-warning"
+                        href="mailto:hola@compraya.com">hola@compraya.com</a>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <p class="text-center text-white-50 small mb-0">© 2026 CompraYA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

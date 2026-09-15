@@ -27,8 +27,8 @@ npm-debug.log*
 
 
 # Practicas
-practica-00-registro
-#practica-01-ficha
+#practica-00-registro
+practica-01-ficha
 practica-02-tablero
 practica-03-memoria
 practica-04-trivia
@@ -36,3 +36,4 @@ practica-05-tipos
 practica-06-mazmorra
 practica-07-marcador
 practica-08-proyecto
+#pagina-marketplace
